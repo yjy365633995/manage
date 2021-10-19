@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ProcurementBidding {
+public class ProcurementBiddingApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ProcurementBidding.class);
+        SpringApplication.run(ProcurementBiddingApplication.class);
     }
 }

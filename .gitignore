@@ -18,19 +18,35 @@
 *.env.test.local
 *.env.production.local
 
+*.DS_Store
+Thumbs.db
+*.sw?
+.#*
+*#
+*~
+*.sublime-*
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
 # Eclipse Project Files
-
 *.classpath
 *.project
 *.settings/
 
 # IntelliJ IDEA Files
-
 *.iml
 *.ipr
 *.iws
 *.idea
+
+*.yml
+
+*.properties
+
+# Build Artifacts
+.gradle/
+*/build
+*/target
+*/bin

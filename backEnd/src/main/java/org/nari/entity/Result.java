@@ -1,6 +1,6 @@
 package org.nari.entity;
 
-import com.hyf.util.JsonUtil;
+import org.nari.util.JsonUtil;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
