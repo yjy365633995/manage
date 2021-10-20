@@ -8,6 +8,7 @@ import org.nari.util.UUID;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -48,6 +49,16 @@ public class UserServiceImpl implements UserService {
     public boolean modifyPassword(User user) {
         user.setPassword(MD5.getMD5(user.getPassword()));
         return userMapper.updatePassword(user) == 1;
+    }
+
+    @Override
+    public List<User> getSuppliers() {
+        return userMapper.getUserByRole(User.Role.Supplier.ordinal());
+    }
+
+    @Override
+    public List<User> getPurchasers() {
+        return userMapper.getUserByRole(User.Role.Purchaser.ordinal());
     }
 
 

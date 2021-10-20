@@ -1,8 +1,10 @@
 package org.nari.controller;
 
+import org.nari.entity.PageRequest;
+import org.nari.entity.Result;
+import org.nari.model.Bidding;
 import org.nari.service.BiddingService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -12,5 +14,14 @@ public class BiddingController {
     @Resource
     BiddingService biddingService;
 
+    @PostMapping("/add")
+    public Result add(@RequestBody Bidding bidding){
+
+    }
+
+    @GetMapping("/list")
+    public Result list(@RequestBody PageRequest pageRequest){
+        return null;
+    }
 
 }
