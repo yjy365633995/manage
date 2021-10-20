@@ -1,28 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.nari.mapper.OfferMapper">
-  <resultMap id="BaseResultMap" type="org.nari.model.Offer">
-    <id column="offer_id" jdbcType="VARCHAR" property="offerId" />
-    <result column="bidding_id" jdbcType="VARCHAR" property="biddingId" />
-    <result column="turn" jdbcType="INTEGER" property="turn" />
-    <result column="company_id" jdbcType="VARCHAR" property="companyId" />
-    <result column="price" jdbcType="DOUBLE" property="price" />
-    <result column="day_num" jdbcType="INTEGER" property="dayNum" />
-    <result column="delivery_date" jdbcType="DATETIME" property="deliveryDate" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
-    <result column="price_ranking" jdbcType="INTEGER" property="priceRanking" />
-    <result column="quality_ranking" jdbcType="INTEGER" property="qualityRanking" />
-    <result column="service_ranking" jdbcType="INTEGER" property="serviceRanking" />
-    <result column="price_score" jdbcType="INTEGER" property="priceScore" />
-    <result column="quality_score" jdbcType="INTEGER" property="qualityScore" />
-    <result column="service_score" jdbcType="INTEGER" property="serviceScore" />
-    <result column="total_score" jdbcType="INTEGER" property="totalScore" />
-    <result column="winning_the_bid" jdbcType="INTEGER" property="winningTheBid" />
-    <result column="is_evaluation" jdbcType="INTEGER" property="isEvaluation" />
-    <result column="visible" jdbcType="INTEGER" property="visible" />
-  </resultMap>
-
-  <insert id="getOfferById" parameterType="org.nari.model.Offer">
+  <insert id="insertOffer" parameterType="org.nari.model.Offer">
     insert into offer
     values (
         #{offerId},#{biddingId}, #{turn},#{companyId},
@@ -70,4 +49,9 @@
       visible = #{visible}
     where offer_id = #{offerId}
   </update>
+
+  <delete id="deleteOfferById" parameterType="java.lang.String">
+    delete from offer where
+        offer_id = #{offerId}
+  </delete>
 </mapper>
