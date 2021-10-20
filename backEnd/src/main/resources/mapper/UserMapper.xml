@@ -16,13 +16,30 @@
     delete from bidding_user
     where user_id = #{userId}
   </delete>
+
   <insert id="insert" parameterType="org.nari.model.User">
     insert into bidding_user
     values (#{userid} , #{account}, #{password}, #{company},
       #{role}, #{companyCode}, #{mail},#{phone})
   </insert>
 
-  <update id="updateByPrimaryKey" parameterType="org.nari.model.User">
+  <select id="getUserByAccount" resultType="org.nari.model.User" parameterType="java.lang.String">
+    select * from bidding_user where account = #{account}
+  </select>
+  <select id="getUserById" resultType="org.nari.model.User" parameterType="java.lang.String">
+    select * from bidding_user where user_id = #{userId}
+  </select>
+  <select id="getAll" resultType="org.nari.model.User">
+    select * from bidding_user
+  </select>
+  <select id="getUserByCompanyCode" resultType="org.nari.model.User" parameterType="java.lang.String">
+    select * from bidding_user where company_code = #{companyCode}
+  </select>
+  <select id="getUserByRole" resultType="org.nari.model.User" parameterType="java.lang.Integer">
+    select * from bidding_user where role = #{role}
+  </select>
+
+  <update id="updateById" parameterType="org.nari.model.User">
     update bidding_user
     set account = #{account},
       password = #{password},

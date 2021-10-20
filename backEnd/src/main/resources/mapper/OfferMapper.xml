@@ -22,12 +22,39 @@
     <result column="visible" jdbcType="INTEGER" property="visible" />
   </resultMap>
 
+  <insert id="getOfferById" parameterType="org.nari.model.Offer">
+    insert into offer
+    values (
+        #{offerId},#{biddingId}, #{turn},#{companyId},
+        #{price},#{dayNum},#{deliveryDate},#{remark},
+        #{priceRanking},#{qualityRanking},#{serviceRanking},
+        #{priceScore},#{qualityScore},#{serviceScore},#{totalScore},
+        #{winningTheBid},#{isEvaluation},#{visible}
+    )
+  </insert>
+
+  <select id="getOfferById" parameterType="java.lang.String" resultType="org.nari.model.Offer">
+    select *from offer
+        where offer_id = #{offerId}
+  </select>
+  <select id="getOffersByBiddingId" parameterType="java.lang.String" resultType="org.nari.model.Offer">
+    select *from offer
+        where bidding_id = #{biddingId}
+  </select>
+  <select id="getOffersByUserId" parameterType="java.lang.String" resultType="org.nari.model.Offer">
+    select *from offer
+        where company_id = #{companyId}
+  </select>
+  <select id="getAll" resultType="org.nari.model.Offer">
+    select *from offer
+  </select>
+
   <update id="updateOfferById" parameterType="org.nari.model.Offer">
     update offer
     set bidding_id = #{biddingId},
       turn = #{turn},
       company_id = #{companyId},
-      price = #{price,jdbcType=DOUBLE},
+      price = #{price},
       day_num = #{dayNum},
       delivery_date = #{deliveryDate},
       remark = #{remark},

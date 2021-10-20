@@ -22,7 +22,35 @@
     <result column="visible" jdbcType="INTEGER" property="visible" />
   </resultMap>
 
-  <update id="updateByPrimaryKey" parameterType="org.nari.model.Bidding">
+  <insert id="insertBidding" parameterType="org.nari.model.Bidding">
+    insert into bidding
+    values(
+        #{uuid}, #{biddingId}, #{startTime},
+        #{materialId}, #{materialName}, #{materialStandard},
+        #{weight}, #{unit}, #{num}, #{deliveryDate},
+        #{adjuncts}, #{adjunctsName}, #{materialRequirement}, #{biddingCompany},
+        #{turnNum}, #{turnTimeMinute},
+        #{status}, #{visible}
+    )
+  </insert>
+
+  <select id="getBiddingById" parameterType="java.lang.String" resultType="org.nari.model.Bidding">
+    select *from bidding
+        where uuid = #{uuid}
+  </select>
+  <select id="getBiddingByBid" parameterType="java.lang.String" resultType="org.nari.model.Bidding">
+    select *from bidding
+        where bidding_id = #{biddingId}
+  </select>
+  <select id="getAll" resultType="org.nari.model.Bidding" >
+    select *from bidding
+  </select>
+  <select id="getBiddingByStatus" parameterType="java.lang.Integer" resultType="org.nari.model.Bidding">
+    select *from bidding
+        where status = #{status}
+  </select>
+
+  <update id="updateBiddingById" parameterType="org.nari.model.Bidding">
     update bidding
     set bidding_id = #{biddingId},
       start_time = #{startTime},
@@ -33,7 +61,7 @@
       unit = #{unit},
       num = #{num},
       delivery_date = #{deliveryDate},
-      adjuncts = #{adjuncts },
+      adjuncts = #{adjuncts},
       adjuncts_name = #{adjunctsName},
       material_requirement = #{materialRequirement},
       bidding_company = #{biddingCompany},
