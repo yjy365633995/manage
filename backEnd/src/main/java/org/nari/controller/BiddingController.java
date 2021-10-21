@@ -32,7 +32,6 @@ public class BiddingController {
 
     @PostMapping("/draft")
     public Result draft(String uuid){
-        //TODO 只有未开始的可以
         return biddingService.cancelRelease(uuid)>0? Result.success():Result.error("更新失败");
     }
 

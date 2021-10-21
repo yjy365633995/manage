@@ -32,9 +32,10 @@ public class BiddingServiceImpl implements BiddingService {
 
     @Override
     public int cancelRelease(String uuid) {
-        Bidding bidding = new Bidding();
-        bidding.setUuid(uuid);
-        bidding.setStatus(Bidding.Visible.Draft.ordinal());
+        Bidding bidding = biddingMapper.getBiddingById(uuid);
+        if(bidding.getStatus() != Bidding.Status.NotStarted.ordinal())
+            return 0;
+        bidding.setVisible(Bidding.Visible.Draft.ordinal());
         return biddingMapper.updateStatus(bidding);
     }
 
