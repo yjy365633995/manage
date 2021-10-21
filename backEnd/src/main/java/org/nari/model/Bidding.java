@@ -46,4 +46,15 @@ public class Bidding {
 
     private Integer visible;
 
+    public enum Visible{
+        Draft,
+        Release
+    }
+
+    public enum Status{
+        NotStarted,
+        InProgress,
+        Finished
+    }
+
 }

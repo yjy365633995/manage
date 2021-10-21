@@ -50,3 +50,5 @@ yarn-error.log*
 */build
 */target
 */bin
+
+*/dist

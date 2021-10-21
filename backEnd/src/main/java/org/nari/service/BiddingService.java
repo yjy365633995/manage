@@ -2,6 +2,8 @@ package org.nari.service;
 
 import org.nari.model.Bidding;
 
+import java.util.List;
+
 public interface BiddingService {
     void addBidding(Bidding bidding);
 
@@ -9,6 +11,5 @@ public interface BiddingService {
 
     void cancelRelease(String biddingId);
 
-
-
+    List<Bidding> getNotFinishedBiddings();
 }

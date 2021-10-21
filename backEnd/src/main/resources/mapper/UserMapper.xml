@@ -30,12 +30,13 @@
 
   <update id="updateById" parameterType="org.nari.model.User">
     update bidding_user
-    set
-    company = #{company},
-    role = #{role},
-    company_code = #{companyCode},
-    mail = #{mail},
-    phone = #{phone}
+    <set>
+      <if test="company!=null and company!=''">company = #{company},</if>
+      <if test="role!=null">role = #{role},</if>
+      <if test="companyCode!=null and companyCode!=''">company_code = #{companyCode},</if>
+      <if test="mail!=null and mail!=''">mail = #{mail},</if>
+      <if test="phone!=null and phone!=''">phone = #{phone}</if>
+    </set>
     where user_id = #{userId}
   </update>
 

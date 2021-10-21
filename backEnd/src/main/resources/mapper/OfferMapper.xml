@@ -30,23 +30,25 @@
 
   <update id="updateOfferById" parameterType="org.nari.model.Offer">
     update offer
-    set bidding_id = #{biddingId},
-      turn = #{turn},
-      company_id = #{companyId},
-      price = #{price},
-      day_num = #{dayNum},
-      delivery_date = #{deliveryDate},
-      remark = #{remark},
-      price_ranking = #{priceRanking},
-      quality_ranking = #{qualityRanking},
-      service_ranking = #{serviceRanking},
-      price_score = #{priceScore},
-      quality_score = #{qualityScore},
-      service_score = #{serviceScore},
-      total_score = #{totalScore},
-      winning_the_bid = #{winningTheBid},
-      is_evaluation = #{isEvaluation},
-      visible = #{visible}
+    <set>
+      <if test="biddingId!=null and biddingId!=''">bidding_id = #{biddingId},</if>
+      <if test="turn!=null">turn = #{turn},</if>
+      <if test="companyId!=null and company_id!=''">company_id = #{companyId},</if>
+      <if test="price!=null">price = #{price},</if>
+      <if test="dayNum!=null">day_num = #{dayNum},</if>
+      <if test="deliveryDate!=null">delivery_date = #{deliveryDate},</if>
+      <if test="remark!=null and remark!=''">remark = #{remark},</if>
+      <if test="priceRanking!=null">price_ranking = #{priceRanking},</if>
+      <if test="qualityRanking!=null">quality_ranking = #{qualityRanking},</if>
+      <if test="serviceRanking!=null">service_ranking = #{serviceRanking},</if>
+      <if test="priceScore!=null">price_score = #{priceScore},</if>
+      <if test="qualityScore!=null">quality_score = #{qualityScore},</if>
+      <if test="serviceScore!=null">service_score = #{serviceScore},</if>
+      <if test="totalScore!=null">total_score = #{totalScore},</if>
+      <if test="winningTheBid!=null">winning_the_bid = #{winningTheBid},</if>
+      <if test="isEvaluation!=null">is_evaluation = #{isEvaluation},</if>
+      <if test="visible!=null">visible = #{visible}</if>
+    </set>
     where offer_id = #{offerId}
   </update>
 

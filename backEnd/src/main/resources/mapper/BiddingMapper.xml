@@ -31,24 +31,36 @@
 
   <update id="updateBiddingById" parameterType="org.nari.model.Bidding">
     update bidding
-    set bidding_id = #{biddingId},
-      start_time = #{startTime},
-      material_id = #{materialId},
-      material_name = #{materialName},
-      material_standard = #{materialStandard},
-      weight = #{weight},
-      unit = #{unit},
-      num = #{num},
-      delivery_date = #{deliveryDate},
-      adjuncts = #{adjuncts},
-      adjuncts_name = #{adjunctsName},
-      material_requirement = #{materialRequirement},
-      bidding_company = #{biddingCompany},
-      turn_num = #{turnNum},
-      turn_time_minute = #{turnTimeMinute},
-      status = #{status},
-      visible = #{visible}
+    <set>
+      <if test="biddingId!=null and biddingId!=''">bidding_id = #{biddingId},</if>
+      <if test="startTime!=null">start_time = #{startTime},</if>
+      <if test="materialId!=null and materialId!=''">material_id = #{materialId},</if>
+      <if test="materialName!=null and materialName!=''">material_name = #{materialName},</if>
+      <if test="materialStandard!=null and materialStandard!=''">material_standard = #{materialStandard},</if>
+      <if test="weight!=null">weight = #{weight},</if>
+      <if test="unit!=null and unit!=''">unit = #{unit},</if>
+      <if test="num!=null">num = #{num},</if>
+      <if test="deliveryDate!=null">delivery_date = #{deliveryDate},</if>
+      <if test="adjuncts!=null and adjuncts!=''">adjuncts = #{adjuncts},</if>
+      <if test="adjunctsName!=null and adjunctsName!=''">adjuncts_name = #{adjunctsName},</if>
+      <if test="turnNum!=null">turn_num = #{turnNum},</if>
+      <if test="turnTimeMinute!=null">turn_time_minute = #{turnTimeMinute},</if>
+      <if test="status!=null">status = #{status},</if>
+      <if test="visible!=null">visible = #{visible}</if>
+    </set>
     where uuid = #{uuid}
+  </update>
+
+  <update id="updateStatus" parameterType="org.nari.model.Bidding">
+    update bidding
+    set status = #{status} where uuid = #{uuid}
+  </update>
+
+  <update id="updateStatusBatch" parameterType="java.util.List">
+    <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+      update bidding
+      set status = #{item.status} where uuid = #{item.uuid}
+    </foreach>
   </update>
 
   <delete id="deleteById" parameterType="java.lang.String">

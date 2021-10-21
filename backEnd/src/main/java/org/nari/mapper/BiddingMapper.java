@@ -19,5 +19,9 @@ public interface BiddingMapper {
 
     int updateBiddingById(Bidding bidding);
 
+    int updateStatus(Bidding bidding);
+
+    int updateStatusBatch(List<Bidding> biddings);
+
     int deleteById(String bid);
 }
