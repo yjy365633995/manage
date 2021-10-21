@@ -16,7 +16,7 @@ public class BiddingController {
 
     @PostMapping("/add")
     public Result add(@RequestBody Bidding bidding){
-
+        return null;
     }
 
     @GetMapping("/list")

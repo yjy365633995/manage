@@ -49,6 +49,20 @@
             <!-- 数据库表主键 -->
             <generatedKey column="user_id" sqlStatement="Mysql" identity="true"/>
         </table>
+        <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名-->
+        <table tableName="offer" domainObjectName="OfferTemp" enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="false"/>
+            <!-- 数据库表主键 -->
+            <generatedKey column="offer_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名-->
+        <table tableName="bidding" domainObjectName="BiddingTemp" enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="false"/>
+            <!-- 数据库表主键 -->
+            <generatedKey column="uuid" sqlStatement="Mysql" identity="true"/>
+        </table>
 
     </context>
 

@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.nari.mapper.BiddingMapper">
+  <resultMap id="BaseResultMap" type="org.nari.model.Bidding">
+    <id column="uuid" jdbcType="VARCHAR" property="uuid" />
+    <result column="bidding_id" jdbcType="VARCHAR" property="biddingId" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="material_id" jdbcType="VARCHAR" property="materialId" />
+    <result column="material_name" jdbcType="VARCHAR" property="materialName" />
+    <result column="material_standard" jdbcType="VARCHAR" property="materialStandard" />
+    <result column="weight" jdbcType="DOUBLE" property="weight" />
+    <result column="unit" jdbcType="VARCHAR" property="unit" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+    <result column="delivery_date" jdbcType="TIMESTAMP" property="deliveryDate" />
+    <result column="adjuncts" jdbcType="VARCHAR" property="adjuncts" />
+    <result column="adjuncts_name" jdbcType="VARCHAR" property="adjunctsName" />
+    <result column="material_requirement" jdbcType="VARCHAR" property="materialRequirement" />
+    <result column="bidding_company" jdbcType="VARCHAR" property="biddingCompany" />
+    <result column="turn_num" jdbcType="INTEGER" property="turnNum" />
+    <result column="turn_time_minute" jdbcType="INTEGER" property="turnTimeMinute" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="visible" jdbcType="INTEGER" property="visible" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    uuid, bidding_id, start_time, material_id, material_name, material_standard, weight,
+    unit, num, delivery_date, adjuncts, adjuncts_name, material_requirement, bidding_company,
+    turn_num, turn_time_minute, status, visible
+  </sql>
+
   <insert id="insertBidding" parameterType="org.nari.model.Bidding">
     insert into bidding
     values(
@@ -13,20 +39,25 @@
     )
   </insert>
 
-  <select id="getBiddingById" parameterType="java.lang.String" resultType="org.nari.model.Bidding">
+  <select id="getBiddingById" parameterType="java.lang.String" resultMap="BaseResultMap">
     select *from bidding
         where uuid = #{uuid}
   </select>
-  <select id="getBiddingByBid" parameterType="java.lang.String" resultType="org.nari.model.Bidding">
+  <select id="getBiddingByBid" parameterType="java.lang.String" resultMap="BaseResultMap">
     select *from bidding
         where bidding_id = #{biddingId}
   </select>
-  <select id="getAll" resultType="org.nari.model.Bidding" >
-    select *from bidding
+  <select id="getAll" resultMap="BaseResultMap" >
+    select *from bidding and visible = 1
   </select>
-  <select id="getBiddingByStatus" parameterType="java.lang.Integer" resultType="org.nari.model.Bidding">
+  <select id="getBiddingByStatus" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select *from bidding
-        where status = #{status}
+        where status = #{status} and visible = 1
+  </select>
+
+  <select id="getBiddingsExcludeStatus" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select *from bidding
+        where status != #{status} and visible = 1
   </select>
 
   <update id="updateBiddingById" parameterType="org.nari.model.Bidding">
@@ -57,9 +88,12 @@
   </update>
 
   <update id="updateStatusBatch" parameterType="java.util.List">
-    <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+    <foreach collection="list" item="item" index="index" open="" close="" separator=",">
       update bidding
-      set status = #{item.status} where uuid = #{item.uuid}
+      <set>
+        status = #{item.status}
+      </set>
+      where uuid = #{item.uuid}
     </foreach>
   </update>
 

@@ -12,4 +12,6 @@ public interface BiddingService {
     void cancelRelease(String biddingId);
 
     List<Bidding> getNotFinishedBiddings();
+
+    void updateStatus(List<Bidding> list);
 }

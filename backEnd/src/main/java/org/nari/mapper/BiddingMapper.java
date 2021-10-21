@@ -1,6 +1,7 @@
 package org.nari.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.nari.model.Bidding;
 
 import java.util.List;
@@ -21,7 +22,9 @@ public interface BiddingMapper {
 
     int updateStatus(Bidding bidding);
 
-    int updateStatusBatch(List<Bidding> biddings);
+    void updateStatusBatch(@Param("list") List<Bidding> biddings);
 
     int deleteById(String bid);
+
+    List<Bidding> getBiddingsExcludeStatus(Integer status);
 }

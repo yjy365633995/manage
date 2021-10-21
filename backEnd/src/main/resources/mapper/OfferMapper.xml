@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.nari.mapper.OfferMapper">
+  <resultMap id="BaseResultMap" type="org.nari.model.Offer">
+    <id column="offer_id" jdbcType="VARCHAR" property="offerId" />
+    <result column="bidding_id" jdbcType="VARCHAR" property="biddingId" />
+    <result column="turn" jdbcType="INTEGER" property="turn" />
+    <result column="company_id" jdbcType="VARCHAR" property="companyId" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="day_num" jdbcType="INTEGER" property="dayNum" />
+    <result column="delivery_date" jdbcType="TIMESTAMP" property="deliveryDate" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="price_ranking" jdbcType="INTEGER" property="priceRanking" />
+    <result column="quality_ranking" jdbcType="INTEGER" property="qualityRanking" />
+    <result column="service_ranking" jdbcType="INTEGER" property="serviceRanking" />
+    <result column="price_score" jdbcType="INTEGER" property="priceScore" />
+    <result column="quality_score" jdbcType="INTEGER" property="qualityScore" />
+    <result column="service_score" jdbcType="INTEGER" property="serviceScore" />
+    <result column="total_score" jdbcType="INTEGER" property="totalScore" />
+    <result column="winning_the_bid" jdbcType="INTEGER" property="winningTheBid" />
+    <result column="is_evaluation" jdbcType="INTEGER" property="isEvaluation" />
+    <result column="visible" jdbcType="INTEGER" property="visible" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    offer_id, bidding_id, turn, company_id, price, day_num, delivery_date, remark, price_ranking,
+    quality_ranking, service_ranking, price_score, quality_score, service_score, total_score,
+    winning_the_bid, is_evaluation, visible
+  </sql>
+
   <insert id="insertOffer" parameterType="org.nari.model.Offer">
     insert into offer
     values (
@@ -12,19 +38,19 @@
     )
   </insert>
 
-  <select id="getOfferById" parameterType="java.lang.String" resultType="org.nari.model.Offer">
+  <select id="getOfferById" parameterType="java.lang.String" resultMap="BaseResultMap">
     select *from offer
         where offer_id = #{offerId}
   </select>
-  <select id="getOffersByBiddingId" parameterType="java.lang.String" resultType="org.nari.model.Offer">
+  <select id="getOffersByBiddingId" parameterType="java.lang.String" resultMap="BaseResultMap">
     select *from offer
         where bidding_id = #{biddingId}
   </select>
-  <select id="getOffersByUserId" parameterType="java.lang.String" resultType="org.nari.model.Offer">
+  <select id="getOffersByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
     select *from offer
         where company_id = #{companyId}
   </select>
-  <select id="getAll" resultType="org.nari.model.Offer">
+  <select id="getAll" resultMap="BaseResultMap">
     select *from offer
   </select>
 

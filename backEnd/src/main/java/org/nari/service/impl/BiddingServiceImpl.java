@@ -31,6 +31,13 @@ public class BiddingServiceImpl implements BiddingService {
 
     @Override
     public List<Bidding> getNotFinishedBiddings() {
-        return null;
+
+        return biddingMapper.getBiddingsExcludeStatus(Bidding.Status.Finished.ordinal());
+    }
+
+    @Override
+    public void updateStatus(List<Bidding> list) {
+        if(null!=list && list.size()!=0)
+            biddingMapper.updateStatusBatch(list);
     }
 }
