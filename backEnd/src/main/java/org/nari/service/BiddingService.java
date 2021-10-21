@@ -5,13 +5,15 @@ import org.nari.model.Bidding;
 import java.util.List;
 
 public interface BiddingService {
-    void addBidding(Bidding bidding);
+    int addBidding(Bidding bidding);
 
-    void releaseBidding(String biddingId);
+    int releaseBidding(String uuid);;
 
-    void cancelRelease(String biddingId);
+    int cancelRelease(String uuid);
+
+    int deleteBidding(String uuid);
 
     List<Bidding> getNotFinishedBiddings();
 
-    void updateStatus(List<Bidding> list);
+    int updateStatus(List<Bidding> list);
 }

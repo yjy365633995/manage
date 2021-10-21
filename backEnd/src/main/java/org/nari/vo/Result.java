@@ -1,4 +1,4 @@
-package org.nari.entity;
+package org.nari.vo;
 
 import org.nari.util.JsonUtil;
 

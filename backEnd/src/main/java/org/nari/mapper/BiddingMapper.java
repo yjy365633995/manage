@@ -22,7 +22,7 @@ public interface BiddingMapper {
 
     int updateStatus(Bidding bidding);
 
-    void updateStatusBatch(@Param("list") List<Bidding> biddings);
+    int updateStatusBatch(@Param("list") List<Bidding> biddings);
 
     int deleteById(String bid);
 

@@ -1,6 +1,6 @@
 package org.nari.controller;
 
-import org.nari.entity.Result;
+import org.nari.vo.Result;
 import org.nari.model.User;
 import org.nari.service.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
