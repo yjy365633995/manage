@@ -18,7 +18,15 @@ public interface OfferMapper {
 
     List<Offer> getAll();
 
+    List<Offer> getWinners(String biddingId);
+
+    List<Offer> getOffersByCompany(String companyId);
+
     int updateOfferById(Offer offer);
 
+    int judgeOffersBatch(List<Offer> offers);
+
     int deleteOfferById(String offerId);
+
+
 }

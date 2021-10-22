@@ -45,4 +45,19 @@ public class Offer {
     private Integer isEvaluation;
 
     private Integer visible;
+
+    public enum Win{
+        NO,
+        YES
+    }
+
+    public enum IsEvaluation{
+        NO,
+        YES
+    }
+
+    public enum Visible{
+        NO,
+        YES
+    }
 }
