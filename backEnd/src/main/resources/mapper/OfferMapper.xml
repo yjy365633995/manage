@@ -54,6 +54,16 @@
     select *from offer
   </select>
 
+  <select id="getWinners" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select *from offer
+    where bidding_id = #{biddingId} and is_evaluation = 1
+  </select>
+
+  <select id="getOffersByCompany" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select *from offer
+    where company_id = #{companyId}
+  </select>
+
   <update id="updateOfferById" parameterType="org.nari.model.Offer">
     update offer
     <set>
@@ -76,6 +86,25 @@
       <if test="visible!=null">visible = #{visible}</if>
     </set>
     where offer_id = #{offerId}
+  </update>
+
+  <update id="judgeOffersBatch" parameterType="java.util.List">
+    update offer
+    <foreach collection="list" item="item">
+    <set>
+      <if test="item.priceRanking!=null">price_ranking = #{item.priceRanking},</if>
+      <if test="item.qualityRanking!=null">quality_ranking = #{item.qualityRanking},</if>
+      <if test="item.serviceRanking!=null">service_ranking = #{item.serviceRanking},</if>
+      <if test="item.priceScore!=null">price_score = #{item.priceScore},</if>
+      <if test="item.qualityScore!=null">quality_score = #{item.qualityScore},</if>
+      <if test="item.serviceScore!=null">service_score = #{item.serviceScore},</if>
+      <if test="item.totalScore!=null">total_score = #{item.totalScore},</if>
+      <if test="item.winningTheBid!=null">winning_the_bid = #{item.winningTheBid},</if>
+      <if test="item.isEvaluation!=null">is_evaluation = #{item.isEvaluation},</if>
+      <if test="item.visible!=null">visible = #{item.visible}</if>
+    </set>
+    where where offer_id = #{item.offerId}
+    </foreach>
   </update>
 
   <delete id="deleteOfferById" parameterType="java.lang.String">
