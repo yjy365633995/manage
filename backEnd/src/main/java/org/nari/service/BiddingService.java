@@ -1,13 +1,17 @@
 package org.nari.service;
 
 import org.nari.model.Bidding;
+import org.nari.vo.PageRequest;
 
+import java.util.Date;
 import java.util.List;
 
 public interface BiddingService {
     int addBidding(Bidding bidding);
 
-    int releaseBidding(String uuid);;
+    List<Bidding> searchBiddings(PageRequest pageRequest, String biddingId, Date date,String materialCode,String materialName);
+
+    int releaseBidding(String uuid);
 
     int cancelRelease(String uuid);
 

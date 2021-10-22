@@ -60,6 +60,16 @@
         where status != #{status} and visible = 1
   </select>
 
+  <select id="searchBiddings" resultMap="BaseResultMap">
+    select *from bidding
+    <where>
+      <if test="biddingId!=null and biddingId!=''">bidding_id = #{biddingId}</if>
+      <if test="date!=null">And to_days(start_time) = to_days(#{date})</if>
+      <if test="materialCode!=null and materialCode!=''">And material_code = #{materialCode}</if>
+      <if test="materialName!=null and materialName!=''">And material_name = #{materialName}</if>
+    </where>
+  </select>
+
   <update id="updateBiddingById" parameterType="org.nari.model.Bidding">
     update bidding
     <set>

@@ -1,12 +1,15 @@
 package org.nari.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import org.nari.mapper.BiddingMapper;
 import org.nari.model.Bidding;
 import org.nari.service.BiddingService;
 import org.nari.util.UUID;
+import org.nari.vo.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -20,6 +23,13 @@ public class BiddingServiceImpl implements BiddingService {
         bidding.setStatus(Bidding.Status.NotStarted.ordinal());
         bidding.setVisible(Bidding.Visible.Draft.ordinal());
         return biddingMapper.insertBidding(bidding);
+    }
+
+    @Override
+    public List<Bidding> searchBiddings(PageRequest pageRequest,
+                                        String biddingId, Date date, String materialCode, String materialName) {
+        PageHelper.startPage(pageRequest.getPageNum(),pageRequest.getPageSize());
+        return biddingMapper.searchBiddings(biddingId,date, materialCode,materialName);
     }
 
     @Override

@@ -61,6 +61,4 @@ public class UserServiceImpl implements UserService {
         return userMapper.getUserByRole(User.Role.Purchaser.ordinal());
     }
 
-
-    //PageHelper.startPage(pageRequest.getPageNum(),pageRequest.getPageSize());
 }
